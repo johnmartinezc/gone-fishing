@@ -5,23 +5,15 @@ let caughtFish = []
 let fish1 = generateFish()
 let fish2 = generateFish()
 
-caughtFish.push(fish1,fish2)
-
-console.log(caughtFish)
-console.log(getTotalWeight())
-
-console.log("Youve gone fishing!")
+console.log("Youve gone fishing! ")
 console.log("Try to macimize the value of your caught fish. ")
-console.log("You can fish for six hours (tille 12:00pm) and can catch at most 10 lbs of fish.")
-
-
-
+console.log("You can fish for six hours (tille 12:00pm) and can catch at most 10 lbs of fish. ")
 
 
 for(let i = 6; i < 13; i++){
     console.log
     ('===========================\n')
-    console.log("The time is " + i +":00am. so far you've caught:")
+    console.log("The time is " + i +":00am. so far you've caught: ")
 
     // console.log(caughtFish.length + ' fish '+ getTotalWeight()+' lbs '+ '$' +  getTotalValue())
     console.log(`${caughtFish.length} fish, ${getTotalWeight()} lbs, $${getTotalValue()}`)
@@ -30,7 +22,14 @@ for(let i = 6; i < 13; i++){
 
     let fish = generateFish()
 
-    console.log('you caught a ' + fish.name + 'weghing' + fish.weight + 'lbs and valued at $' + fish.value)
+    console.log('you caught a ' + fish.name + 'weghing ' + fish.weight + 'lbs and valued at $' + fish.value)
+    let currentTotalWeight = getTotalWeight()
+
+    if(currentTotalWeight + fish.weight > 10){
+        console.log('\n This fish would put you over 10 lbs, so you can release it. \n')
+        prompt('press any key too continue')
+        
+    }
 
     let action = prompt("\n Your actionss: [C]atch or [R]elease?")
 
@@ -40,33 +39,24 @@ for(let i = 6; i < 13; i++){
     }
 
 
+
     if(action === 'c'){
         caughtFish.push(fish)
-        console.log('\n You chose to keep the' + fish.name +'\n')
+        console.log('\n You chose to keep the ' + fish.name +'\n')
     }else if(action === 'r'){
-        console.log('\n You chose to release the' + fish.name +'\n')
-
+        console.log('\n You chose to release the ' + fish.name +'\n')
     }
 }
 
+console.log('The time is now 12:00. ')
 
+console.log('You caught ' + caughtFish.length + ' Fish: ')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for(let i = 0; caughtFish.length > i; i++){
+    console.log(caughtFish[i].name +' '+ caughtFish[i].weight +' lbs ' + caughtFish[i].value)
+}
+ console.log('\n Total weight: ' + getTotalWeight() + ' lbs')
+ console.log('\n Total value: ' +'$'+ getTotalValue() )
 
 
 
@@ -86,7 +76,7 @@ function generateRandomValue(){
     let value = Number((Math.random()*5).toPrecision(3))
 
 
-    while(value < 0.1){
+    while(value < 1){
         value = Number((Math.random()*5).toPrecision(3))
     }
 
@@ -139,8 +129,6 @@ function generateFish(){
     return fish
 }
 
-console.log(generateFish())
-
 function getTotalWeight(){
 
 let totalWeight = 0
@@ -154,12 +142,13 @@ return Number(totalWeight.toPrecision(3))
 function getTotalValue(){
     let totalValue = 0
 
+   
     for(let fish of caughtFish){
         totalValue = totalValue + fish.value
     }
     
 
- return totalValue
+ return Number(totalValue)
 }
 
 
